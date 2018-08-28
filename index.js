@@ -178,15 +178,18 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onOpen: function(ev) {
       this.socket.send('setup');
     },
-    send: function(key, op, value) {
-      this.socket.send(key + " " + value);
+		send: function(command, key, value) {
+      this.socket.send(
+        JSON.stringify(
+          Array.prototype.slice.call(
+            arguments)));
     },
-    command: function(command, param) {
+		command: function(command, param) {
       param = typeof(param) === 'undefined' ? '' : param;
-      console.log('executing '+command+'('+param+')');
-      this.send(command,"W", param);
+      console.debug('executing '+command+'('+param+')');
+      this.send('publish', command, 'W', param);
     },
-  };
+};
 
   return API;
 }));
