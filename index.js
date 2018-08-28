@@ -178,13 +178,13 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onOpen: function(ev) {
       this.socket.send('setup');
     },
-		send: function(command, key, value) {
+	send: function(command, key, value) {
       this.socket.send(
         JSON.stringify(
           Array.prototype.slice.call(
             arguments)));
     },
-		command: function(key, value) {
+	command: function(key, value) {
       param = typeof(value) === 'undefined' ? '' : value;
       console.debug('executing '+key+'('+value+')');
       this.send('publish', key, 'W', value);
