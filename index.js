@@ -61,6 +61,17 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
         this.onReceiveCallback(this.state);
       }
     },
+		getByPath: function(obj, path) {
+      if (path.length > 0) {
+        key = path.shift();
+        if(key == ".") {
+          return null;
+        } else if (obj === undefined) {
+          return null;
+        }
+        return this.getByPath(obj[key], path);
+      }
+    },
     subscribe: function(eventName, fn) {
       this.eventHandlers[eventName] = this.eventHandlers[eventName] || [];
       this.eventHandlers[eventName].push(fn);
