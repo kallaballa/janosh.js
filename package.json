@@ -1,0 +1,15 @@
+{
+    "name": "janosh.js",
+    "version": "0.0.1",
+    "description": "A JavaScript API for Janosh",
+    "author": "kallaballa",
+    "license": "AGPL",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/kallaballa/janosh.js.git"
+    },
+    "dependencies": {
+        "reconnecting-websocket": "joewalnes/reconnecting-websocket"
+    }
+}
