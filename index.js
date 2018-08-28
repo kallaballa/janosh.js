@@ -184,10 +184,10 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
           Array.prototype.slice.call(
             arguments)));
     },
-		command: function(command, param) {
-      param = typeof(param) === 'undefined' ? '' : param;
-      console.debug('executing '+command+'('+param+')');
-      this.send('publish', command, 'W', param);
+		command: function(key, value) {
+      param = typeof(value) === 'undefined' ? '' : value;
+      console.debug('executing '+key+'('+value+')');
+      this.send('publish', key, 'W', value);
     },
 };
 
