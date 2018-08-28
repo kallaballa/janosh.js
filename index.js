@@ -186,7 +186,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     command: function(command, param) {
       param = typeof(param) === 'undefined' ? '' : param;
-      console.debug('executing '+command+'('+param+')');
+      console.log('executing '+command+'('+param+')');
       this.send(command, param);
     },
   };
