@@ -96,16 +96,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
         obj[key] = value;
       }
     },
-    deleteByPath: function (obj, path) {
-      if (path.length > 1) {
-        key = path.shift();
-        if(key.charAt(0) == '#') {
-          key = parseInt(key.substring(1));
-        }
-
-        if(path[0] == ".") {
-          if(Array.isArray(obj)) {
-     
     setByPath: function (obj, path, value) {
       if (path.length > 1) {
         key = path.shift();
@@ -166,23 +156,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
         key = path.shift();
         delete obj[key];
       }
-    },       if(obj.length < 2)
-              obj = [];
-            else
-              obj.splice(key, 1);
-          }
-          else
-            delete obj[key];
-
-          return null;
-        }
-
-        return this.deleteByPath(obj[key], path);
-      } else {
-        key = path.shift();
-        delete obj[key];
-      }
-    },
+    }, 
 		getByPath: function(obj, path) {
       if (path.length > 0) {
         key = path.shift();
