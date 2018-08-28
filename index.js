@@ -61,78 +61,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
         this.onReceiveCallback(this.state);
       }
     },
-    setByPath: function (obj, path, value) {
-      if (path.length > 1) {
-        key = path.shift();
-        if(key.charAt(0) == '#') {
-          //encountered an array element
-          key = parseInt(key.substring(1));
-        } else if(key == ".") {
-          //encountered a directory element -> ignore
-          return null;
-        }
-
-        if(obj[key] === undefined) {
-          if(path.length >= 1 && path[0] == ".") {
-            if(value.charAt(0) == 'A') {
-              //create an array
-              obj[key] = [];
-              return null;
-            } else {
-              //create an object
-              obj[key] = {};
-              return null;
-            }
-          } else {
-            obj[key] = "";
-          }
-        }
-        return this.setByPath(obj[key], path, value);
-      } else {
-        key = path.shift();
-        if(key == ".") {
-          return null;
-        }
-        obj[key] = value;
-      }
-    },
-    deleteByPath: function (obj, path) {
-      if (path.length > 1) {
-        key = path.shift();
-        if(key.charAt(0) == '#') {
-          key = parseInt(key.substring(1));
-        }
-
-        if(path[0] == ".") {
-          if(Array.isArray(obj)) {
-            if(obj.length < 2)
-              obj = [];
-            else
-              obj.splice(key, 1);
-          }
-          else
-            delete obj[key];
-
-          return null;
-        }
-
-        return this.deleteByPath(obj[key], path);
-      } else {
-        key = path.shift();
-        delete obj[key];
-      }
-    },
-    getByPath: function(obj, path) {
-      if (path.length > 0) {
-        key = path.shift();
-        if(key == ".") {
-          return null;
-        } else if (obj === undefined) {
-          return null;
-        }
-        return this.getByPath(obj[key], path);
-      }
-    },
     subscribe: function(eventName, fn) {
       this.eventHandlers[eventName] = this.eventHandlers[eventName] || [];
       this.eventHandlers[eventName].push(fn);
@@ -148,10 +76,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
         JSON.stringify(
           Array.prototype.slice.call(
             arguments)));
-    },
-    set: function (key, value) {
-      console.debug('setting', key, 'to', value);
-      this.send('trigger', key, value);
     },
     command: function(command, param) {
       param = typeof(param) === 'undefined' ? '' : param;
