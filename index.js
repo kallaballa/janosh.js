@@ -17,6 +17,23 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
 
     this.eventHandlers = {};
   };
+  function waitForSocketConnection(socket, callback){
+    setTimeout(
+        function () {
+            if (socket.readyState === 1) {
+                console.log("Connection is made")
+                if(callback != null){
+                    callback();
+                }
+                return;
+
+            } else {
+                console.log("wait for connection...")
+                waitForSocketConnection(socket, callback);
+            }
+
+        }, 5); // wait 5 milisecond for the connection...
+  }
 
   API.prototype = {
     onReceive: function(fn) {
@@ -183,11 +200,13 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onReady: function(fn) {
       this.onready = fn;
     },
-	send: function(command, key, value) {
-      this.socket.send(
-        JSON.stringify(
-          Array.prototype.slice.call(
-            arguments)));
+    send: function(command, key, value) {
+      waitForSocketConnection(this.socket, function(){
+        this.socket.send(
+          JSON.stringify(
+            Array.prototype.slice.call(
+              arguments)));
+      });
     },
     command: function(key, value) {
       console.debug('executing '+key+'('+value+')');
