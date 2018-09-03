@@ -201,8 +201,9 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       this.onready = fn;
     },
     send: function(command, key, value) {
+     var sock = this.socket();
       waitForSocketConnection(this.socket, function(){
-        this.socket.send(
+        sock.send(
           JSON.stringify(
             Array.prototype.slice.call(
               arguments)));
