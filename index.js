@@ -189,8 +189,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
           Array.prototype.slice.call(
             arguments)));
     },
-	command: function(key, value) {
-      param = typeof(value) === 'undefined' ? '' : value;
+    command: function(key, value) {
       console.debug('executing '+key+'('+value+')');
       this.send('publish', key, 'W', value);
     },
