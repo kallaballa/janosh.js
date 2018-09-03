@@ -21,18 +21,16 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     setTimeout(
         function () {
             if (socket.readyState === 1) {
-                console.log("Connection is made")
                 if(callback != null){
                     callback();
                 }
                 return;
 
             } else {
-                console.log("wait for connection...")
                 waitForSocketConnection(socket, callback);
             }
 
-        }, 5); // wait 5 milisecond for the connection...
+        }, 100); // wait 100 milisecond for the connection...
   }
 
   API.prototype = {
