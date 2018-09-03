@@ -177,6 +177,11 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     onOpen: function(ev) {
       this.socket.send('setup');
+      if(this.onready)
+	this.onready();
+    },
+    onReady: function(fn) {
+      this.onready = fn;
     },
 	send: function(command, key, value) {
       this.socket.send(
