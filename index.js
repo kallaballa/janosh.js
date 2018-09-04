@@ -199,16 +199,17 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       this.onready = fn;
     },
     send: function(command, key, value) {
-     var sock = this.socket;
+     let sock = this.socket;
+     let argv = arguments;
       waitForSocketConnection(this.socket, function(){
         sock.send(
           JSON.stringify(
             Array.prototype.slice.call(
-              arguments)));
+              argv)));
       });
     },
     command: function(key, value) {
-      console.debug('executing '+key+'('+value+')');
+      //console.debug('executing '+key+'('+value+')');
       this.send('publish', key, 'W', value);
     },
 };
