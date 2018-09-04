@@ -10,50 +10,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     root.ScreenInvader = factory();
   }
 }(this, function () {
-if (!Object.prototype.watch) {
-	Object.defineProperty(Object.prototype, "watch", {
-		  enumerable: false
-		, configurable: true
-		, writable: false
-		, value: function (prop, handler) {
-			var
-			  oldval = this[prop]
-			, newval = oldval
-			, getter = function () {
-				return newval;
-			}
-			, setter = function (val) {
-				oldval = newval;
-				return newval = handler.call(this, prop, oldval, val);
-			}
-			;
-			
-			if (delete this[prop]) { // can't watch constants
-				Object.defineProperty(this, prop, {
-					  get: getter
-					, set: setter
-					, enumerable: true
-					, configurable: true
-				});
-			}
-		}
-	});
-}
-
-// object.unwatch
-if (!Object.prototype.unwatch) {
-	Object.defineProperty(Object.prototype, "unwatch", {
-		  enumerable: false
-		, configurable: true
-		, writable: false
-		, value: function (prop) {
-			var val = this[prop];
-			delete this[prop]; // remove accessors
-			this[prop] = val;
-		}
-	});
-}
-
   var API = function(uri) {
     this.socket = new ReconnectingWebSocket(uri);
     this.socket.onmessage = this.onMessage.bind(this);
@@ -252,11 +208,6 @@ if (!Object.prototype.unwatch) {
             Array.prototype.slice.call(
               argv)));
       });
-    },
-    sync: function(prop) {
-	Object.watch(prop, (p) => {
-	    console.log(p);
-	});
     },
     publish: function(key, op, value) {
       this.send('publish', key, op, value);
