@@ -70,8 +70,8 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
 	
 		var eventName = update[0];
 
-f		for (var key in this.eventHandlers) {
-    			if (this.eventHandlers.hasOwnProperty(key) && eventName.startsWith(key)) {
+		Object.keys(this.eventHandlers).forEach(function(key) {
+    			if (eventName.startsWith(key)) {
 				var handlers = this.eventHandlers[key]   
 				if (Array.isArray(handlers)) {
                         		handlers.forEach(function(handler) {
@@ -80,7 +80,8 @@ f		for (var key in this.eventHandlers) {
    
  				}
 			}
-￼		}
+				
+		});
           } else if(update[1] == "D") {
 		this.deleteByPath(this.state, path.slice(0));
           }
