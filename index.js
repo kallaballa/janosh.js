@@ -209,6 +209,9 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       }
 	
       this.send('publish', key, op, value);
+    },
+    getState: function() {
+      return this.state;
     }
 };
 
