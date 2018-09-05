@@ -74,7 +74,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
 				var handlers = eh[key]   
 				if (Array.isArray(handlers)) {
                         		handlers.forEach(function(handler) {
-                                		handler(eventName);
+                                		handler(eventName, update[2]);
                         		});
    
  				}
