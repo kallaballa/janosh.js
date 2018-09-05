@@ -53,7 +53,17 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
           path.shift();
           console.log(path);
           if(update[1] == "W") {
-            console.debug('changing ' + update[0] + ' from ' +
+            	if(update[2].charAt(0) == 'b') {
+			update[2] = update[2] === "btrue" ? true : false
+		} else if(update[2].charAt(0) == 'n') {
+			if(update[2].indexOf(".") > -1)
+                        	update[2] = parseFloat(update[2].substring(1));
+			else
+                                update[2] = parseInt(update[2].substring(1));
+		} else if(update[2].charAt(0) == 's') {
+			update[2] = update[2].substring(1);
+		}
+		console.debug('changing ' + update[0] + ' from ' +
                           this.getByPath(this.state, path.slice(0)) +
                           ' to ' + update[2]);
             this.setByPath(this.state, path.slice(0), update[2]);
