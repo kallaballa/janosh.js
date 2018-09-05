@@ -215,10 +215,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     publish: function(key, op, value) {
       this.send('publish', key, op, value);
     },
-    command: function(key, value) {
-      //console.debug('executing '+key+'('+value+')');
-      this.send('publish', key, 'W', value);
-    },
 };
 
   return API;
