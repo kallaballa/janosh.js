@@ -63,8 +63,8 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
 		} else if(update[2].charAt(0) == 's') {
 			update[2] = update[2].substring(1);
 		}
-		console.debug('changing ' + update[0] + ' from ' +
-                          this.getByPath(this.state, path.slice(0)) +
+		//console.debug('changing ' + update[0] + ' from ' +
+                //          this.getByPath(this.state, path.slice(0)) +
                           ' to ' + update[2]);
 		this.setByPath(this.state, path.slice(0), update[2]);
 	
