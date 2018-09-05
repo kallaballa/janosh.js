@@ -51,7 +51,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
           // update has the format key, operation, value here.
           var path = update[0].split('/');
           path.shift();
-          console.log(path);
           if(update[1] == "W") {
             	if(update[2].charAt(0) == 'b') {
 			update[2] = update[2] === "btrue" ? true : false
