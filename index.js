@@ -66,9 +66,22 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
 		console.debug('changing ' + update[0] + ' from ' +
                           this.getByPath(this.state, path.slice(0)) +
                           ' to ' + update[2]);
-            this.setByPath(this.state, path.slice(0), update[2]);
+		this.setByPath(this.state, path.slice(0), update[2]);
+	
+		var eventName = update[0],
+f		for (var key in this.eventHandlers) {
+    			if (this.eventHandlers.hasOwnProperty(key) && eventName.startsWith(key)) {
+				var handlers = this.eventHandlers[key]   
+				if (Array.isArray(handlers)) {
+                        		handlers.forEach(function(handler) {
+                                		handler(eventName);
+                        		});
+   
+ 				}
+			}
+￼		}
           } else if(update[1] == "D") {
-            this.deleteByPath(this.state, path.slice(0));
+		this.deleteByPath(this.state, path.slice(0));
           }
         } else {
           // update has the following format: event, operation, value
@@ -85,41 +98,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       }
       if (typeof(this.onReceiveCallback) !== 'undefined') {
         this.onReceiveCallback(this.state);
-      }
-    },
-    setByPath: function (obj, path, value) {
-      if (path.length > 1) {
-        key = path.shift();
-        if(key.charAt(0) == '#') {
-          //encountered an array element
-          key = parseInt(key.substring(1));
-        } else if(key == ".") {
-          //encountered a directory element -> ignore
-          return null;
-        }
-
-        if(obj[key] === undefined) {
-          if(path.length >= 1 && path[0] == ".") {
-            if(value.charAt(0) == 'A') {
-              //create an array
-              obj[key] = [];
-              return null;
-            } else {
-              //create an object
-              obj[key] = {};
-              return null;
-            }
-          } else {
-            obj[key] = "";
-          }
-        }
-        return this.setByPath(obj[key], path, value);
-      } else {
-        key = path.shift();
-        if(key == ".") {
-          return null;
-        }
-        obj[key] = value;
       }
     },
     setByPath: function (obj, path, value) {
