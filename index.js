@@ -68,7 +68,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
                           ' to ' + update[2]);
 		this.setByPath(this.state, path.slice(0), update[2]);
 	
-		var eventName = update[0],
+		var eventName = update[0];
 f		for (var key in this.eventHandlers) {
     			if (this.eventHandlers.hasOwnProperty(key) && eventName.startsWith(key)) {
 				var handlers = this.eventHandlers[key]   
