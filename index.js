@@ -201,7 +201,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     update: function() {
       this.socket.send('setup');
-    },,
+    },
     send: function(command, key, value) {
      let sock = this.socket;
      let argv = arguments;
