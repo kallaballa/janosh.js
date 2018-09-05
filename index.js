@@ -213,7 +213,11 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       });
     },
     publish: function(key, op, value) {
-      this.send('publish', key, op, value);
+    if(op == null)
+	op = "W";
+     if(value == null)
+	value = ""; 
+     this.send('publish', key, op, value);
     },
 };
 
