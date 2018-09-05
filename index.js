@@ -212,13 +212,13 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
               argv)));
       });
     },
-    publish: function(key, op, value) {
-    if(op == null)
-	op = "W";
-     if(value == null)
-	value = ""; 
-     this.send('publish', key, op, value);
+
+    publish: function(key, value) {
+     this.send('publish', key, "W", value);
     },
+    publish: function(key, op, value) {
+     this.send('publish', key, op, value);
+    }
 };
 
   return API;
