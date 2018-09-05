@@ -65,7 +65,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
 		}
 		//console.debug('changing ' + update[0] + ' from ' +
                 //          this.getByPath(this.state, path.slice(0)) +
-                          ' to ' + update[2]);
+                //          ' to ' + update[2]);
 		this.setByPath(this.state, path.slice(0), update[2]);
 	
 		var eventName = update[0];
