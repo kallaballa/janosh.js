@@ -39,7 +39,9 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       this.onReceiveCallback = fn;
     },
     onMessage: function(ev) {
+      try {
       var update = JSON.parse(ev.data);
+      console.log(ev.data)
       if (!Array.isArray(update)) {
         // initial full sync.
         this.state = update;
@@ -96,10 +98,11 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
           }
           return;
         }
-      }
+      }}catch(error) {
       if (typeof(this.onReceiveCallback) !== 'undefined') {
-        this.onReceiveCallback(this.state);
+        this.onReceiveCallback(ev.data);
       }
+      }  
     },
     setByPath: function (obj, path, value) {
       if (path.length > 1) {
