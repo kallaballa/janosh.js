@@ -184,7 +184,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       this.socket.onerror = fn;
     },
     onOpen: function(ev) {
-      this.update();
       if(this.onready)
 	this.onready();
     },
