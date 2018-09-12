@@ -192,7 +192,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     send: function(data) {
 	this.socket.send(data);
-    }
+    },
     send: function(command, key, op, value) {
      let sock = this.socket;
      let argv = arguments;
