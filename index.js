@@ -212,6 +212,12 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     getState: function() {
       return this.state;
     }
+    register: function(username,password,userdata) {
+    	sock.send('register\n' + username + '\n' + password + '\n' + userdata + '\n');
+    }
+    login: function(username,password) {
+        sock.send('login\n' + username + '\n' + password + '\n');
+    }
 };
 
   return API;
