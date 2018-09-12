@@ -190,7 +190,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onReady: function(fn) {
       this.onready = fn;
     },
-    send: function(command, key, value) {
+    send: function(command, key, op, value) {
      let sock = this.socket;
      let argv = arguments;
       waitForSocketConnection(this.socket, function(){
@@ -216,6 +216,9 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     login: function(username,password) {
         sock.send('login\n' + username + '\n' + password + '\n');
+    }
+    setup: function() {
+	sock.send("setup");
     }
 };
 
