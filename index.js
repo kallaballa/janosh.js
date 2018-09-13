@@ -46,6 +46,8 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
         // initial full sync.
         this.state = update;
         this.state.events = {};
+	if(this.onfullupdate)
+		this.onfullupdate();
       } else {
         if (!this.state) { return; }
 
@@ -189,6 +191,9 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     onReady: function(fn) {
       this.onready = fn;
+    },
+    onFullUpdate: function(fn) {
+      this.onfullupdate = fn;
     },
     send: function(command, key, value) {
      let sock = this.socket;
