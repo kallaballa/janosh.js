@@ -41,12 +41,11 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onMessage: function(ev) {
       try {
       var update = JSON.parse(ev.data);
+      console.log(ev.data)
       if (!Array.isArray(update)) {
         // initial full sync.
         this.state = update;
         this.state.events = {};
-	if(this.onsetup)
-		this.onsetup();
       } else {
         if (!this.state) { return; }
 
@@ -184,9 +183,9 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onError: function(fn) {
       this.socket.onerror = fn;
     },
-    
-    onSetup: function(fn) { 
-      this.onsetup = fn;
+    onOpen: function(ev) {
+      if(this.onready)
+	this.onready();
     },
     onReady: function(fn) {
       this.onready = fn;
