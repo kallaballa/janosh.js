@@ -190,9 +190,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onReady: function(fn) {
       this.onready = fn;
     },
-    send: function(data) {
-	this.socket.send(data);
-    }
     send: function(command, key, op, value) {
      let sock = this.socket;
      let argv = arguments;
@@ -215,10 +212,13 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
       return this.state;
     },
     register: function(username,password,userdata) {
-    	this.socket.send('register\n' + username + '\n' + password + '\n' + userdata + '\n');
+    	sock.send('register\n' + username + '\n' + password + '\n' + userdata + '\n');
     },
     login: function(username,password) {
-        this.socket.send('login\n' + username + '\n' + password + '\n');
+        sock.send('login\n' + username + '\n' + password + '\n');
+    }
+    setup: function() {
+	sock.send("setup");
     }
 };
 
