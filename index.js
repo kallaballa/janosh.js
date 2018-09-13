@@ -40,8 +40,8 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     onMessage: function(ev) {
       try {
-      var update = JSON.parse(ev.data);
       console.log(ev.data)
+      var update = JSON.parse(ev.data);
       if (!Array.isArray(update)) {
         // initial full sync.
         this.state = update;
