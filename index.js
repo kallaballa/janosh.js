@@ -49,8 +49,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
 	if(this.onfullupdate)
 		this.onfullupdate();
       } else {
-        if (!this.state) { return; }
-
         if (update[0].startsWith('/')) {
           // update has the format key, operation, value here.
           var path = update[0].split('/');
@@ -92,8 +90,8 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
           // update has the following format: event, operation, value
           var eventName = update[0],
               params = update[2];
-          var handlers = this.eventHandlers[eventName];
-          if (Array.isArray(handlers)) {
+	  var handlers = this.eventHandlers[eventName];
+	if (Array.isArray(handlers)) {
             handlers.forEach(function(handler) {
               handler(params);
             });
