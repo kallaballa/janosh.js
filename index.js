@@ -14,7 +14,7 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     this.socket = new ReconnectingWebSocket(uri);
     this.socket.onmessage = this.onMessage.bind(this);
     this.socket.onerror = this.onError.bind(this);
-    this.socket.onopen = this.onOpen.bind(this);
+    this.socket.onopen = this.onReady.bind(this);
 
     this.eventHandlers = {};
   };
