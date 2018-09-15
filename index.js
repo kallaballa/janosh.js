@@ -219,7 +219,11 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     },
     login: function(username,password) {
         this.socket.send('login\n' + username + '\n' + password + '\n');
+    },
+    login: function(sessionKey) {
+        this.socket.send('login\n' + sessionKey + '\n');
     }
+
 };
 
   return API;
