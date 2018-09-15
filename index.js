@@ -183,10 +183,6 @@ var ReconnectingWebSocket = require("ReconnectingWebSocket");
     onError: function(fn) {
       this.socket.onerror = fn;
     },
-    onOpen: function(ev) {
-      if(this.onready)
-	this.onready();
-    },
     onReady: function(fn) {
       this.onready = fn;
     },
