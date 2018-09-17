@@ -1,4 +1,4 @@
-var ReconnectingWebSocket = require("ReconnectingWebSocket");
+var ReconnectingWebSocket = require("reconnecting-websocket");
 
 
 (function (root, factory) {
