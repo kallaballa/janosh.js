@@ -10,6 +10,6 @@
         "url": "git://github.com/kallaballa/janosh.js.git"
     },
     "dependencies": {
-        "reconnecting-websocket": "~3.2.2"
+        "reconnecting-websocket": "*"
     }
 }
