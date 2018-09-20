@@ -70,7 +70,7 @@ var ReconnectingWebSocket = require("reconnecting-websocket");
 		this.setByPath(this.state, path.slice(0), update[2]);
 	
 		var eventName = update[0];
-		let eh = this.eventHandlers;
+		var eh = this.eventHandlers;
 		Object.keys(eh).forEach(function(key) {
     			if (eventName.startsWith(key)) {
 				var handlers = eh[key]   
@@ -194,8 +194,8 @@ var ReconnectingWebSocket = require("reconnecting-websocket");
       this.onfullupdate = fn;
     },
     send: function(command, key, value) {
-     let sock = this.socket;
-     let argv = arguments;
+     var sock = this.socket;
+     var argv = arguments;
       waitForSocketConnection(this.socket, function(){
         sock.send(
           JSON.stringify(
